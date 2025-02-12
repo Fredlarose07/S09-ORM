@@ -1,0 +1,5 @@
+# Ignorer le répertoire db_data
+db_data/
+
+# Ignorer le fichier mysql.sock
+db_data/mysql.sock
