@@ -1,17 +1,9 @@
 import { QueryBuilder } from "./querybuilder"; // Importer la classe QueryBuilder
 import mysql from "mysql2"; // Importer le module mysql2
-
-// Configuration de la connexion à la base de données
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "password",
-    database: "yourdb"
-});
+import { connection } from "./db";  // Importer la connexion à la base de données
 
 type User = {
     id: number;
-    username: string;
     email: string;
     active: boolean;
     created_at: Date;
@@ -28,7 +20,7 @@ const query = QueryBuilder.buildSelectQuery<User>({
     limit: 10
 });
 
-console.log("Requête SQL générée:", query);
+console.log(query);
 
 // Exécution de la requête
 connection.query(query, (err, results) => {

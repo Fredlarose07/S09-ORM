@@ -4,12 +4,14 @@ import { OrderBy, WhereClause, SelectQueryParams } from "./types";
 export class QueryBuilder {
     static buildSelectQuery<T>({
         tableName,
-        fields,
+        fields = [],
         where,
         orderBy,
         limit
     }: SelectQueryParams<T>): string {
-        let query = `SELECT ${fields.join(", ")} FROM ${tableName}`;
+        
+        const selectedFields = fields.length > 0 ? fields.join(", ") : "*";
+        let query = `SELECT ${selectedFields} FROM ${tableName}`;
 
         if (where && Object.keys(where).length > 0) {
             const conditions = Object.entries(where)
